@@ -33,7 +33,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://your-frontend-name.onrender.com"
+      "https://handio-frontend.onrender.com"
     ],
     credentials: true,
   })
