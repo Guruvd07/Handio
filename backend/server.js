@@ -19,22 +19,14 @@ const app = express();
    SECURITY & PERFORMANCE
 =========================== */
 
-// Important when deployed behind Render proxy
 app.set("trust proxy", 1);
 
-// Security headers
 app.use(helmet());
-
-// Gzip compression
 app.use(compression());
 
-// CORS (IMPORTANT — restrict in production)
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://handio-frontend.onrender.com"
-    ],
+    origin: ["https://handio-frontend.onrender.com"],
     credentials: true,
   })
 );
@@ -42,17 +34,17 @@ app.use(
 app.use(express.json());
 
 /* ===========================
-   ROUTES
+   ROUTES (STANDARDIZED)
 =========================== */
 
-app.use("/providers", providerRoutes);
-app.use("/auth", authRoutes);
-app.use("/admin", adminRoutes);
-app.use("/bookings", bookingRoutes);
+app.use("/api/providers", providerRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/bookings", bookingRoutes);
 app.use("/api/reviews", reviewRoutes);
 
 /* ===========================
-   HEALTH CHECK (for uptime ping)
+   HEALTH CHECK
 =========================== */
 
 app.get("/api/health", (req, res) => {
